@@ -16,10 +16,12 @@ import Cart from "./pages/Cart"
 import Address from './pages/address';
 import Sample from './pages/mobile2';
 import Payment from './pages/payment';
-import Setting from './pages/setting';
+import Setting from './pages/Setting';
 import ProductApi from './pages/productApi';
 import ProductApiDetails from './pages/ProductApiDetails';
 import Wishlist from './pages/Wishlist';
+
+
 
 const App = () => {
   return (
@@ -52,7 +54,7 @@ const App = () => {
 
     <Route path='/Login' element={<Login/>}></Route>
     <Route path='/Cart' element={<Cart/>}></Route>
-    <Route path='/setting' element={<Setting/>}></Route>
+    <Route path='/Setting' element={<Setting/>}></Route>
     <Route path='/productApi' element={<ProductApi/>}></Route>
     <Route path="/ProductApiDetails/:_id" element={<ProductApiDetails/>}/>
     <Route path="/address" element={<Address />} />
