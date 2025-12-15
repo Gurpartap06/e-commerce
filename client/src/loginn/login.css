@@ -1,0 +1,16 @@
+.loginn{
+    text-align: center;
+    padding-left: 250px;
+}
+
+.sign{
+    font-size: 50px;
+    font-weight: var(--font-semi-bold);
+}
+.abc {
+
+    width: 250px;
+    text-align:left;
+    border: 2px solid black;
+    border-radius: 30px;
+}

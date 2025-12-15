@@ -1,0 +1,317 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "User Authentication API",
+    "version": "1.0.0",
+    "description": "API documentation for User Authentication System"
+  },
+
+  "servers": [
+    { "url": "http://localhost:9090" }
+  ],
+
+  "paths": {
+    "/signup": {
+      "post": {
+        "summary": "Create new user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SignupRequest" }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "New user created" },
+          "500": { "description": "Email already exists" }
+        }
+      }
+    },
+
+    "/login": {
+      "post": {
+        "summary": "Login using email + password & send OTP to email",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/LoginRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "OTP sent & token generated" },
+          "404": { "description": "Invalid email or password" }
+        }
+      }
+    },
+
+    "/verify-otp": {
+      "post": {
+        "summary": "Verify OTP for login",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/VerifyOtpRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "OTP Verified" },
+          "401": { "description": "Invalid OTP" },
+          "404": { "description": "User not found" }
+        }
+      }
+    },
+
+    "/login-username": {
+      "post": {
+        "summary": "Login using username + password",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/LoginUsernameRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Login success" },
+          "404": { "description": "User not found or password incorrect" }
+        }
+      }
+    },
+
+    "/user/{id}": {
+      "get": {
+        "summary": "Get user by ID",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "User found",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/User" } } }
+          },
+          "404": { "description": "User not found" }
+        }
+      }
+    },
+
+    "/update/{id}": {
+      "put": {
+        "summary": "Update user info",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UpdateUserRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "User updated" },
+          "404": { "description": "User not found" }
+        }
+      }
+    },
+
+    "/delete/{id}": {
+      "delete": {
+        "summary": "Delete user by ID",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": { "description": "User deleted" },
+          "404": { "description": "User not found" }
+        }
+      }
+    },
+
+    "/upload-avatar/{id}": {
+      "post": {
+        "summary": "Upload user avatar (image)",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "avatar": { "type": "string", "format": "binary" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Avatar uploaded" },
+          "404": { "description": "User not found" }
+        }
+      }
+    },
+
+    "/upload-avatar-video/{id}": {
+      "post": {
+        "summary": "Upload user avatar video",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "avatarVideo": { "type": "string", "format": "binary" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Avatar video uploaded" },
+          "404": { "description": "User not found" }
+        }
+      }
+    },
+
+    "/change-password": {
+      "post": {
+        "summary": "Change password using email + oldPassword",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ChangePasswordRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Password changed" },
+          "401": { "description": "Invalid credentials" }
+        }
+      }
+    },
+
+    "/forget-password": {
+      "post": {
+        "summary": "Generate & send temporary password",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ForgetPasswordRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Temporary password emailed" },
+          "404": { "description": "User not found" }
+        }
+      }
+    },
+
+    "/logout/{id}": {
+      "post": {
+        "summary": "Logout user by ID",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": { "description": "User logged out" },
+          "404": { "description": "User not found" }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "schemas": {
+      "SignupRequest": {
+        "type": "object",
+        "required": ["username", "password", "email"],
+        "properties": {
+          "username": { "type": "string" },
+          "password": { "type": "string" },
+          "email": { "type": "string" }
+        }
+      },
+
+      "LoginRequest": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": { "type": "string" },
+          "password": { "type": "string" }
+        }
+      },
+
+      "VerifyOtpRequest": {
+        "type": "object",
+        "required": ["email", "otp"],
+        "properties": {
+          "email": { "type": "string" },
+          "otp": { "type": "string" }
+        }
+      },
+
+      "LoginUsernameRequest": {
+        "type": "object",
+        "required": ["username", "password"],
+        "properties": {
+          "username": { "type": "string" },
+          "password": { "type": "string" }
+        }
+      },
+
+      "UpdateUserRequest": {
+        "type": "object",
+        "required": ["username", "name", "email", "phone"],
+        "properties": {
+          "username": { "type": "string" },
+          "name": { "type": "string" },
+          "email": { "type": "string" },
+          "phone": { "type": "number" }
+        }
+      },
+
+      "ChangePasswordRequest": {
+        "type": "object",
+        "required": ["email", "oldPassword", "newPassword"],
+        "properties": {
+          "email": { "type": "string" },
+          "oldPassword": { "type": "string" },
+          "newPassword": { "type": "string" }
+        }
+      },
+
+      "ForgetPasswordRequest": {
+        "type": "object",
+        "required": ["email"],
+        "properties": { "email": { "type": "string" } }
+      },
+
+      "User": {
+        "type": "object",
+        "properties": {
+          "_id": { "type": "string" },
+          "username": { "type": "string" },
+          "email": { "type": "string" },
+          "avatar": { "type": "string" },
+          "avatarVideo": { "type": "string" }
+        }
+      }
+    }
+  }
+}
