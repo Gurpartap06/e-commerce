@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { product } from './Mobile Cover';
+import { product } from './MobileCover';
 import { addToCart } from '../slice/Cartslice';
 import { useDispatch } from 'react-redux';
 

@@ -5,7 +5,7 @@ import { BrowserRouter,Routes,Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Men from "./pages/Men"
 import Women from"./pages/Women"
-import MobileCover from './pages/Mobile Cover'
+import MobileCover from './pages/MobileCover'
 import Product from './pages/product'
 import Login from './loginn/Login';
 
@@ -16,7 +16,7 @@ import Cart from "./pages/Cart"
 import Address from './pages/address';
 import Sample from './pages/mobile2';
 import Payment from './pages/payment';
-import Setting from './pages/Setting';
+import Setting from './pages/UserPage';
 import ProductApi from './pages/productApi';
 import ProductApiDetails from './pages/ProductApiDetails';
 import Wishlist from './pages/Wishlist';
