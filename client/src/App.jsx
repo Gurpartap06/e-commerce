@@ -17,7 +17,7 @@ import Address from './pages/address';
 import Sample from './pages/mobile2';
 import Payment from './pages/payment';
 import Setting from './pages/UserPage';
-import ProductApi from './pages/productApi';
+import ProductApi from './pages/ProductApi';
 import ProductApiDetails from './pages/ProductApiDetails';
 import Wishlist from './pages/Wishlist';
 
