@@ -5,7 +5,7 @@ import axios from "axios";
 import ab from "../loginn/login.jpg";
 import { useNavigate } from "react-router-dom";
 
-const Base_Url = "http://localhost:9090";
+const Base_Url = "https://e-commerce-oz7e.onrender.com";
 
 const UserPage = () => {
   const navigate = useNavigate();

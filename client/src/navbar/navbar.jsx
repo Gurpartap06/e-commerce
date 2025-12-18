@@ -12,7 +12,7 @@ import { useTheme } from "../usecontext/Themecontext";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
-const BASE_URL = "http://localhost:9090";
+const BASE_URL = "https://e-commerce-oz7e.onrender.com";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
