@@ -286,7 +286,7 @@
 
 
 
-const User = require("../model/User");
+const User = require("../model/user");
 const bcrypt = require("bcrypt");
 const { text } = require("express");
 const nodemailer = require("nodemailer");
