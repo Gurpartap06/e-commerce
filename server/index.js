@@ -6,16 +6,19 @@ const productRouter = require("./router/product");
 const cors = require("cors")
 const setupSwagger =  require("./swagger/swagger");
 const productApiRouter = require("./router/productApi");
+const dotenv = require("dotenv")
 
 // const dotenv = require ("dotenv")
+
+
 
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 
-// dotenv.config()
+dotenv.config()
 
-const PORT =9090
+const PORT =process.env.PORT
 
 app.use(cors({
   origin: "http://localhost:5173",

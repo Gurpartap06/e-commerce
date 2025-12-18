@@ -4,7 +4,9 @@ const mongoose = require("mongoose")
 const  dbConnection = () =>{
 
 
-    const db = mongoose.connect("mongodb://localhost:27017/myyourDatabase")
+    // const db = mongoose.connect(Process.env.MONGO_URL)
+    const db = mongoose.connect(process.env.MONGO_URL)
+
 
     db.then(()=>{
         console.log("db is connected")
