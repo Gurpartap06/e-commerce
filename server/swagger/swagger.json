@@ -85,7 +85,7 @@
       }
     },
 
-    "/productCheck/{id}": {
+    "/api/productApi/productCheck/{id}": {
       "get": {
         "summary": "Get product by ID",
         "tags": ["Product"],
@@ -99,7 +99,7 @@
       }
     },
 
-    "/updatedProduct/{id}": {
+    "/api/productApi/updatedProduct/{id}": {
       "patch": {
         "summary": "Update product",
         "tags": ["Product"],
@@ -121,7 +121,7 @@
       }
     },
 
-    "/productDelete/{id}": {
+    "/api/productApi/productDelete/{id}": {
       "delete": {
         "summary": "Delete product",
         "tags": ["Product"],
@@ -134,7 +134,7 @@
       }
     },
 
-    "/getAll": {
+    "/api/productApi/getAll": {
       "get": {
         "summary": "Get all products",
         "tags": ["Product"],
@@ -144,7 +144,7 @@
       }
     },
 
-    "/searchbybrand": {
+    "/api/productApi/searchbybrand": {
       "get": {
         "summary": "Search product by brand",
         "tags": ["Product"],
@@ -157,7 +157,7 @@
       }
     },
 
-    "/upload-avatar/{id}": {
+    "/api/productApi/upload-avatar/{id}": {
       "post": {
         "summary": "Upload product avatar",
         "tags": ["Product"],
