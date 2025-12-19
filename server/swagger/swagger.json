@@ -1,11 +1,12 @@
+
+
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "User Authentication API",
+    "title": "User & Product API",
     "version": "1.0.0",
-    "description": "API documentation for User Authentication System"
+    "description": "API documentation for User Authentication and Product Management"
   },
-
   "servers": [
     { "url": "http://localhost:9090" }
   ],
@@ -31,7 +32,7 @@
 
     "/login": {
       "post": {
-        "summary": "Login using email + password & send OTP to email",
+        "summary": "Login using email + password & send OTP",
         "requestBody": {
           "required": true,
           "content": {
@@ -41,15 +42,15 @@
           }
         },
         "responses": {
-          "200": { "description": "OTP sent & token generated" },
-          "404": { "description": "Invalid email or password" }
+          "200": { "description": "OTP sent" },
+          "404": { "description": "Invalid credentials" }
         }
       }
     },
 
     "/verify-otp": {
       "post": {
-        "summary": "Verify OTP for login",
+        "summary": "Verify OTP",
         "requestBody": {
           "required": true,
           "content": {
@@ -59,50 +60,49 @@
           }
         },
         "responses": {
-          "200": { "description": "OTP Verified" },
-          "401": { "description": "Invalid OTP" },
-          "404": { "description": "User not found" }
+          "200": { "description": "OTP verified" },
+          "401": { "description": "Invalid OTP" }
         }
       }
     },
 
-    "/login-username": {
+    "/api/productApi/productCreate": {
       "post": {
-        "summary": "Login using username + password",
+        "summary": "Create product",
+        "tags": ["Product"],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/LoginUsernameRequest" }
+              "schema": { "$ref": "#/components/schemas/productApi" }
             }
           }
         },
         "responses": {
-          "200": { "description": "Login success" },
-          "404": { "description": "User not found or password incorrect" }
+          "201": { "description": "Product created" },
+          "400": { "description": "Duplicate product" }
         }
       }
     },
 
-    "/user/{id}": {
+    "/productCheck/{id}": {
       "get": {
-        "summary": "Get user by ID",
+        "summary": "Get product by ID",
+        "tags": ["Product"],
         "parameters": [
           { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
         ],
         "responses": {
-          "200": {
-            "description": "User found",
-            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/User" } } }
-          },
-          "404": { "description": "User not found" }
+          "200": { "description": "Product found" },
+          "404": { "description": "Product not found" }
         }
       }
     },
 
-    "/update/{id}": {
-      "put": {
-        "summary": "Update user info",
+    "/updatedProduct/{id}": {
+      "patch": {
+        "summary": "Update product",
+        "tags": ["Product"],
         "parameters": [
           { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
         ],
@@ -110,33 +110,57 @@
           "required": true,
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/UpdateUserRequest" }
+              "schema": { "$ref": "#/components/schemas/Product" }
             }
           }
         },
         "responses": {
-          "200": { "description": "User updated" },
-          "404": { "description": "User not found" }
+          "200": { "description": "Product updated" },
+          "404": { "description": "Product not found" }
         }
       }
     },
 
-    "/delete/{id}": {
+    "/productDelete/{id}": {
       "delete": {
-        "summary": "Delete user by ID",
+        "summary": "Delete product",
+        "tags": ["Product"],
         "parameters": [
           { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
         ],
         "responses": {
-          "200": { "description": "User deleted" },
-          "404": { "description": "User not found" }
+          "200": { "description": "Product deleted" }
+        }
+      }
+    },
+
+    "/getAll": {
+      "get": {
+        "summary": "Get all products",
+        "tags": ["Product"],
+        "responses": {
+          "200": { "description": "All products" }
+        }
+      }
+    },
+
+    "/searchbybrand": {
+      "get": {
+        "summary": "Search product by brand",
+        "tags": ["Product"],
+        "parameters": [
+          { "name": "brand", "in": "query", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": { "description": "Products found" }
         }
       }
     },
 
     "/upload-avatar/{id}": {
       "post": {
-        "summary": "Upload user avatar (image)",
+        "summary": "Upload product avatar",
+        "tags": ["Product"],
         "parameters": [
           { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
         ],
@@ -154,83 +178,7 @@
           }
         },
         "responses": {
-          "200": { "description": "Avatar uploaded" },
-          "404": { "description": "User not found" }
-        }
-      }
-    },
-
-    "/upload-avatar-video/{id}": {
-      "post": {
-        "summary": "Upload user avatar video",
-        "parameters": [
-          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "avatarVideo": { "type": "string", "format": "binary" }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": { "description": "Avatar video uploaded" },
-          "404": { "description": "User not found" }
-        }
-      }
-    },
-
-    "/change-password": {
-      "post": {
-        "summary": "Change password using email + oldPassword",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/ChangePasswordRequest" }
-            }
-          }
-        },
-        "responses": {
-          "200": { "description": "Password changed" },
-          "401": { "description": "Invalid credentials" }
-        }
-      }
-    },
-
-    "/forget-password": {
-      "post": {
-        "summary": "Generate & send temporary password",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/ForgetPasswordRequest" }
-            }
-          }
-        },
-        "responses": {
-          "200": { "description": "Temporary password emailed" },
-          "404": { "description": "User not found" }
-        }
-      }
-    },
-
-    "/logout/{id}": {
-      "post": {
-        "summary": "Logout user by ID",
-        "parameters": [
-          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
-        ],
-        "responses": {
-          "200": { "description": "User logged out" },
-          "404": { "description": "User not found" }
+          "200": { "description": "Avatar uploaded" }
         }
       }
     }
@@ -266,50 +214,15 @@
         }
       },
 
-      "LoginUsernameRequest": {
+      "productApi": {
         "type": "object",
-        "required": ["username", "password"],
+        "required": ["brand", "description", "price", "oldPrice"],
         "properties": {
-          "username": { "type": "string" },
-          "password": { "type": "string" }
-        }
-      },
-
-      "UpdateUserRequest": {
-        "type": "object",
-        "required": ["username", "name", "email", "phone"],
-        "properties": {
-          "username": { "type": "string" },
-          "name": { "type": "string" },
-          "email": { "type": "string" },
-          "phone": { "type": "number" }
-        }
-      },
-
-      "ChangePasswordRequest": {
-        "type": "object",
-        "required": ["email", "oldPassword", "newPassword"],
-        "properties": {
-          "email": { "type": "string" },
-          "oldPassword": { "type": "string" },
-          "newPassword": { "type": "string" }
-        }
-      },
-
-      "ForgetPasswordRequest": {
-        "type": "object",
-        "required": ["email"],
-        "properties": { "email": { "type": "string" } }
-      },
-
-      "User": {
-        "type": "object",
-        "properties": {
-          "_id": { "type": "string" },
-          "username": { "type": "string" },
-          "email": { "type": "string" },
-          "avatar": { "type": "string" },
-          "avatarVideo": { "type": "string" }
+          "brand": { "type": "string" },
+          "description": { "type": "string" },
+          "price": { "type": "string" },
+          "oldPrice": { "type": "string" },
+          "avatar": { "type": "string" }
         }
       }
     }
