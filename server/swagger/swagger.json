@@ -1,5 +1,3 @@
-
-
 {
   "openapi": "3.0.0",
   "info": {
@@ -8,9 +6,8 @@
     "description": "API documentation for User Authentication and Product Management"
   },
   "servers": [
-    { "url": "http://localhost:9090" }
+    { "url": "/" }
   ],
-
   "paths": {
     "/signup": {
       "post": {
@@ -74,7 +71,7 @@
           "required": true,
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/productApi" }
+              "schema": { "$ref": "#/components/schemas/Product" }
             }
           }
         },
@@ -214,7 +211,7 @@
         }
       },
 
-      "productApi": {
+      "Product": {
         "type": "object",
         "required": ["brand", "description", "price", "oldPrice"],
         "properties": {
