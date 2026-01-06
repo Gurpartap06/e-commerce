@@ -21,7 +21,12 @@ dotenv.config()
 const PORT =process.env.PORT
 
 app.use(cors({
-  origin: "http://localhost:5173",
+   origin: [
+    "http://localhost:5173",
+    "https://e-commerce-1-ftod.onrender.com",
+    "https://fitzo-urban.vercel.app/"
+  ],
+  
   methods: "GET,POST,PUT,DELETE",
   allowedHeaders: "Content-Type,Authorization"
 }));
