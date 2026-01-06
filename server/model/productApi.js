@@ -4,20 +4,20 @@ const ProductApiScheme =  mongoose.Schema({
 
 brand :{
     type : String,
-    required :  false
+    required :  true
 },
 
 description :{
     type : String,
-    required :  false
+    required :  true
 },
 price :{
     type : String,
-    required :  false
+    required :  true
 },
 oldPrice :{
     type : String,
-    required : false
+    required : true
 },
 
 avatar:{
