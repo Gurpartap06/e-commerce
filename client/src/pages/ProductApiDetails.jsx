@@ -70,7 +70,7 @@ const ProductApiDetails = () => {
     const fetchById = async () => {
       try {
         const response = await fetch(
-          `https://e-commerce-oz7e.onrender.com/api/productApi/productCheck/${_id}`
+          `https://e-commerce-1-ftod.onrender.com/api/productApi/productCheck/${_id}`
         );
         const result = await response.json();
         setProduct(result.product);
@@ -107,7 +107,7 @@ const ProductApiDetails = () => {
         {/* Image Section */}
         <div className="w-full h-[350px] md:h-[450px] bg-gray-100 rounded-lg flex items-center justify-center">
           <img
-            src={`https://e-commerce-oz7e.onrender.com/assests/images/${product.avatar}`}
+            src={`https://e-commerce-1-ftod.onrender.com/assests/images/${product.avatar}`}
             alt={product.brand}
             className="w-full h-full object-contain p-4"
           />
