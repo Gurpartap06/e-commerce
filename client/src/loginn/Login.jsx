@@ -4,7 +4,7 @@ import "./login.css";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
-const Base_Url = "https://e-commerce-1-ftod.onrender.com";
+const BASE_URL = "https://e-commerce-1-w203.onrender.com";
 
 const Login = () => {
 
