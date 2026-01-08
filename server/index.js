@@ -149,7 +149,7 @@ const PORT = process.env.PORT || 9090;
 app.use(
   cors({
     origin: [
-      "http://localhost:5173",
+      "http://localhost:5174",
       "https://fitzo-urban.vercel.app"
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
